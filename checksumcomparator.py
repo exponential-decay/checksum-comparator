@@ -80,7 +80,7 @@ def main():
    #	Handle command line arguments for the script
    
    #  TODO: Format of checksums in README
-   parser = argparse.ArgumentParser(description='Compare two lists of non-identical checksums.')
+   parser = argparse.ArgumentParser(description='Compare two non-identical, or identical checksum files.')
 
    #TODO: Consider optional and mandatory elements... behaviour might change depending on output...
    #other options droid csv and rosetta schema
@@ -88,7 +88,7 @@ def main():
    parser.add_argument('--check1', help='Checksum file one.', default=False, required=False)
    parser.add_argument('--check2', help='Checksum file two.', default=False, required=False)
    parser.add_argument('--pre', help='Pre-conditioned objects.', default=False, required=False, action="store_true")
-   parser.add_argument('--v', help='Verbose: Output comparison files.', default=False, required=False, action="store_true")
+   parser.add_argument('--v', help='Verbose: Output comparison list.', default=False, required=False, action="store_true")
 
    if len(sys.argv)==1:
       parser.print_help()
