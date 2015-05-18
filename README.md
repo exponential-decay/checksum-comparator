@@ -18,7 +18,11 @@ Tool should return simple output, identical, lists of differences, lists of simi
 
 That is what it does. More below. 
 
-###Example use
+###Unit Tests
+
+One cannot emphasise enough the importance of unit tests in code for this purpose. Tests will continue to be added to this repository.
+
+###Example Use
 
 > python checksumcomparator.py --check1 2015-01-26-e3-hashes-normalized.txt --check2 2015-05-18-checksums-sha1-normalized.txt --pre --v
 
