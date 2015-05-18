@@ -24,7 +24,7 @@ One cannot emphasise enough the importance of unit tests in code for this purpos
 
 ###Example Use
 
-> python checksumcomparator.py --check1 2015-01-26-e3-hashes-normalized.txt --check2 2015-05-18-checksums-sha1-normalized.txt --pre --v
+    > python checksumcomparator.py --check1 2015-01-26-e3-hashes-normalized.txt --check2 2015-05-18-checksums-sha1-normalized.txt --pre --v
 
     usage: checksumcomparator.py [-h] [--check1 CHECK1] [--check2 CHECK2] [--pre]
                                  [--v]
