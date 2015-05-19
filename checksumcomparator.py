@@ -59,7 +59,6 @@ class ChecksumCompare:
    
    def __getSame__(self, ordered_lists):
       return ordered_lists[self.SMALLER] & ordered_lists[self.BIGGER]
-   
 
    def doCompare(self, check1, check2, pre, verbose):
       csvlist1 = self.returncsvaslist(check1, pre)
