@@ -101,6 +101,7 @@ class ChecksumComparatorTests(TestCase):
       self.assertEqual(len(same), len_compare)
       self.assertNotEqual(len(same), ZERO)
 
+   # If we're stripping filename extensions then test the capability to compare
    def test_pre_conditioned_objects(self):
       self.setup()
       
