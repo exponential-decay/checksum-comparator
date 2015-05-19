@@ -25,16 +25,23 @@ class ChecksumCompare:
          for d in same:
             sys.stdout.write(d + "\n")
 
+   # CSV returned as list, pre-condition those items
+   # Isolated code to support unit tests looking at pre-conditioning
+   def preconditionlist(self, csvaslist, pre):
+      list = []
+      for item in csvaslist: 
+         if pre:
+            row = item[0] + " " + item[1].rsplit('.', 1)[0]
+         else:
+            row = item[0] + " " + item[1]
+         list.append(row)
+      return list
+
    def returncsvaslist(self, csvfile, pre):
       list = []
-      with open(csvfile, 'rb') as csvfile1: 
-         list1 = csv.reader(csvfile1, delimiter=',')
-         for item in list1: 
-            if pre:
-               row = item[0] + " " + item[1].rsplit('.', 1)[0]
-            else:
-               row = item[0] + " " + item[1]
-            list.append(row)
+      with open(csvfile, 'rb') as csvfile: 
+         csvaslist = csv.reader(csvfile, delimiter=',')
+         list = self.preconditionlist(csvaslist, pre)
       return list
 
    def order_by_size(self, csvlist1, csvlist2):
