@@ -54,6 +54,13 @@ class ChecksumCompare:
          
       return bigger, smaller
 
+   def __getDiff__(self, ordered_lists):
+      return list(set(ordered_lists[self.BIGGER]) - set(ordered_lists[self.SMALLER]))
+   
+   def __getSame__(self, ordered_lists):
+      return ordered_lists[self.SMALLER] & ordered_lists[self.BIGGER]
+   
+
    def doCompare(self, check1, check2, pre, verbose):
       csvlist1 = self.returncsvaslist(check1, pre)
       csvlist2 = self.returncsvaslist(check2, pre)
@@ -61,10 +68,10 @@ class ChecksumCompare:
       ordered_lists = self.order_by_size(csvlist1, csvlist2)
       
       #in smaller but not in bigger
-      diff = list(set(ordered_lists[self.BIGGER]) - set(ordered_lists[self.SMALLER]))
+      diff = self.__getDiff__(ordered_lists)
       
       #common elements in both
-      same = ordered_lists[self.SMALLER] & ordered_lists[self.BIGGER]
+      same = self.__getSame__(ordered_lists)
 
       #output a report of findings...
       self.outputformattedtext(check1, check2, same, diff, verbose)
