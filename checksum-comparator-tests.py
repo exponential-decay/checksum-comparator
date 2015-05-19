@@ -57,9 +57,11 @@ class ChecksumComparatorTests(TestCase):
       
       #Test difference list is zero...
       self.assertEqual(len(diff), ZERO)
+      self.assertNotEqual(len(diff), len_compare)
       
       #Test same list is the what we're expecting (len(self.big_list) == 3)
       self.assertEqual(len(same), len_compare)
+      self.assertNotEqual(len(same), ZERO)
         
 def main():
 	suite = TestLoader().loadTestsFromTestCase(ChecksumComparatorTests)
