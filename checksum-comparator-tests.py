@@ -28,11 +28,19 @@ class ChecksumComparatorTests(TestCase):
       
    def test_differences(self):
       self.setup()
-      lists = self.compare.order_by_size(self.big_list, self.small_list)
-      diff = self.compare.__getDiff__(lists)
       
-      #We know we're only expecting one result, compare.
+      #Create ordered lists... 
+      lists = self.compare.order_by_size(self.big_list, self.small_list)
+      
+      #Get diff and same lists...
+      diff = self.compare.__getDiff__(lists)
+      same = self.compare.__getSame__(lists)
+      
+      #We know we're only expecting one result, compare...
       self.assertEqual(diff[0], self.odd_one_out)
+      
+      #And double confirm value is not in samelist...
+      self.assertTrue(self.odd_one_out in diff and self.odd_one_out not in same)
       
 def main():
 	suite = TestLoader().loadTestsFromTestCase(ChecksumComparatorTests)
