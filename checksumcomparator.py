@@ -54,9 +54,11 @@ class ChecksumCompare:
          
       return bigger, smaller
 
+   # differences between one list and another: checksum conflicts
    def __getDiff__(self, ordered_lists):
       return list(set(ordered_lists[self.BIGGER]) - set(ordered_lists[self.SMALLER]))
    
+   # similarities between one list and another: checksum matches
    def __getSame__(self, ordered_lists):
       return ordered_lists[self.SMALLER] & ordered_lists[self.BIGGER]
 

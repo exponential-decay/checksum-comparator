@@ -41,7 +41,26 @@ class ChecksumComparatorTests(TestCase):
       
       #And double confirm value is not in samelist...
       self.assertTrue(self.odd_one_out in diff and self.odd_one_out not in same)
+
+   def test_identical_lists(self):
+      self.setup()
       
+      len_compare = len(self.big_list)
+      ZERO = 0
+      
+      #Create ordered lists... 
+      lists = self.compare.order_by_size(self.big_list, self.big_list)
+      
+      #Get diff and same lists...
+      diff = self.compare.__getDiff__(lists)
+      same = self.compare.__getSame__(lists)
+      
+      #Test difference list is zero...
+      self.assertEqual(len(diff), ZERO)
+      
+      #Test same list is the what we're expecting (len(self.big_list) == 3)
+      self.assertEqual(len(same), len_compare)
+        
 def main():
 	suite = TestLoader().loadTestsFromTestCase(ChecksumComparatorTests)
 	TextTestRunner().run(suite)

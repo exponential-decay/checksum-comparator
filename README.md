@@ -16,6 +16,8 @@ Part of the principle of keeping this tool so simple, is that, using tools like 
 
 Tool should return simple output, identical, lists of differences, lists of similarities. 
 
+A benefit of the tool in its current format is that it works with checksums AND paths (actually, just two columns of stirngs really) increasing the granularity of the matches we discover. 
+
 That is what it does. More below. 
 
 ###Unit Tests
