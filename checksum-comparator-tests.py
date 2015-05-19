@@ -6,14 +6,14 @@ class ChecksumComparatorTests(TestCase):
    def setup(self):
       self.compare = ChecksumCompare()
 
-      self.big_list = ["e0861941c1ac038836097a8f2a3e729482fe1acd E3/Speeches/1 Community & Voluntary Sector/2007/Deptnotes/First AGM Speech1220415DA - speech.doc",
-         "318e91cdfca61d11a250a907bad6fd039c91b5d0 E3/Speeches/1 Community & Voluntary Sector/2007/1229032DA - Digital Future Summit Speech Notes - revised DRAFT.doc",
-         "203a7c3aebf65f93552774accd7fa268a587667b E3/Speeches/1 Community & Voluntary Sector/2007/1234400DA - Briefing Release of COGS Profile 2006-07.dot"]
+      self.big_list = ["e0861941c1ac038836097a8f2a3e729482fe1acd Files/Data/Open Data Community/2007/Data Processing/Speech.doc",
+         "318e91cdfca61d11a250a907bad6fd039c91b5d0 Files/Data/Open Data Community/2007/0024601DA - Web of Objects - DRAFT.doc",
+         "203a7c3aebf65f93552774accd7fa268a587667b Files/Data/Open Data Community/2007/2006-07-Collaboration-Template.dot"]
 
-      self.small_list = ["e0861941c1ac038836097a8f2a3e729482fe1acd E3/Speeches/1 Community & Voluntary Sector/2007/Deptnotes/First AGM Speech1220415DA - speech.doc", \
-         "318e91cdfca61d11a250a907bad6fd039c91b5d0 E3/Speeches/1 Community & Voluntary Sector/2007/1229032DA - Digital Future Summit Speech Notes - revised DRAFT.doc"] 
+      self.small_list = ["e0861941c1ac038836097a8f2a3e729482fe1acd Files/Data/Open Data Community/2007/Data Processing/Speech.doc", \
+         "318e91cdfca61d11a250a907bad6fd039c91b5d0 Files/Data/Open Data Community/2007/0024601DA - Web of Objects - DRAFT.doc"] 
    
-      self.odd_one_out = "203a7c3aebf65f93552774accd7fa268a587667b E3/Speeches/1 Community & Voluntary Sector/2007/1234400DA - Briefing Release of COGS Profile 2006-07.dot"
+      self.odd_one_out = "203a7c3aebf65f93552774accd7fa268a587667b Files/Data/Open Data Community/2007/2006-07-Collaboration-Template.dot"
    
    def test_sizing(self):
       self.setup()
