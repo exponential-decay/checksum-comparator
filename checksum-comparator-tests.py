@@ -15,6 +15,8 @@ class ChecksumComparatorTests(TestCase):
    
       self.odd_one_out = "203a7c3aebf65f93552774accd7fa268a587667b Files/Data/Open Data Community/2007/2006-07-Collaboration-Template.dot"
    
+   #Vital that the smaller set it compared to the bigger set to test for inclusion, and no change for remaining objects
+   #Example, pre-distillation: bigger list (all objects received), post-distillation: smaller list (we've removed objects)
    def test_sizing(self):
       self.setup()
    
@@ -25,7 +27,8 @@ class ChecksumComparatorTests(TestCase):
       
       #Ensure we're not getting something else...
       self.assertNotEqual(bigger_list, set(self.small_list))
-      
+    
+   #Test that the differences we see are the differences that we're expecting
    def test_differences(self):
       self.setup()
       
@@ -40,8 +43,10 @@ class ChecksumComparatorTests(TestCase):
       self.assertEqual(diff[0], self.odd_one_out)
       
       #And double confirm value is not in samelist...
+
       self.assertTrue(self.odd_one_out in diff and self.odd_one_out not in same)
 
+   #Lists are allowed to be equal, so ensure equivalence works.
    def test_identical_lists(self):
       self.setup()
       
