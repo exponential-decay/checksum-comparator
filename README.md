@@ -24,6 +24,10 @@ That is what it does. More below.
 
 One cannot emphasise enough the importance of unit tests in code for this purpose. Tests will continue to be added to this repository.
 
+###Limitations
+
+The tool can't handle a situation where the filename string has significantly changed (or paths). An potential (non Archives) example might be changing spaces for dashes in a filename, e.g. 'this is a file.txt' becomes 'this-is-a-file.txt'. The hope is that presenting the 'diff' list to end-users will help them understand and sign-off checksum integrity using their own heuristics. 
+
 ###Example Use
 
     > python checksumcomparator.py --check1 2015-01-26-e3-hashes-normalized.txt --check2 2015-05-18-checksums-sha1-normalized.txt --pre --v
@@ -37,7 +41,7 @@ One cannot emphasise enough the importance of unit tests in code for this purpos
       -h, --help       show this help message and exit
       --check1 CHECK1  Checksum file one.
       --check2 CHECK2  Checksum file two.
-      --pre            Pre-conditioned objects.
+      --pre            Pre-conditioned objects. Objects minus file extensions.
       --v              Verbose: Output comparison list.
 
 ###License
