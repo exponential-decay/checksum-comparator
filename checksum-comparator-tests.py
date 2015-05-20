@@ -60,6 +60,14 @@ class ChecksumComparatorTests(TestCase):
       
       #Ensure we're not getting something else...
       self.assertNotEqual(bigger_list, set(self.small_list))
+      
+      even_bigger_list = self.compare.order_by_size(self.huge_list, self.big_list)[self.compare.BIGGER]
+      
+      #Do we get the list back that we expect, verbatim...
+      self.assertEqual(even_bigger_list, set(self.huge_list)) 
+      
+      #Ensure we're not getting something else...
+      self.assertNotEqual(even_bigger_list, set(self.big_list))
     
    #Test that the differences we see are the differences that we're expecting
    def test_differences(self):
