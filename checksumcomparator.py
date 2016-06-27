@@ -31,9 +31,9 @@ class ChecksumCompare:
       list = []
       for item in csvaslist: 
          if pre:
-            row = item[0] + " " + item[1].rsplit('.', 1)[0]
+            row = item[0] + " " + ''.join(item[1:]).rsplit('.', 1)[0]
          else:
-            row = item[0] + " " + item[1]
+            row = item[0] + " " + ''.join(item[1:])
          list.append(row)
       return list
 
