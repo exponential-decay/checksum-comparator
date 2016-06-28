@@ -2,6 +2,7 @@ import datetime
 import argparse
 import csv
 import sys
+from header import comparison_header
 
 class ChecksumCompare:
 
@@ -9,6 +10,8 @@ class ChecksumCompare:
    SMALLER = 1
 
    def outputformattedtext(self, check1, check2, same, diff, verbose):
+      sys.stdout.write(comparison_header + "\n\n")
+   
       sys.stdout.write("File 1: " + check1 + "\nFile 2: " + check2 + "\n\nChecksum comparison: " +  str(datetime.datetime.now()) + "\n\n")
       
       sys.stdout.write("Matching objects: " + str(len(same)) + "\n")
