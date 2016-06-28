@@ -9,18 +9,30 @@ class ChecksumCompare:
    BIGGER = 0
    SMALLER = 1
 
-   def outputformattedtext(self, check1, check2, same, diff, verbose):
+   def outputformattedtext(self, check1, check2, same, diff, verbose, newitems):
+         
       sys.stdout.write(comparison_header + "\n\n")
    
       sys.stdout.write("File 1: " + check1 + "\nFile 2: " + check2 + "\n\nChecksum comparison: " +  str(datetime.datetime.now()) + "\n\n")
       
       sys.stdout.write("Matching objects: " + str(len(same)) + "\n")
-      sys.stdout.write("Differing objects: " + str(len(diff)) + "\n")
+
+      if newitems is not None:
+         nouvelle = len(newitems)
+         sys.stdout.write("New objects: " + str(nouvelle) + "\n")
+         sys.stdout.write("Other checksum differences: " + str(len(diff)) + "\n")
+      else:
+         sys.stdout.write("Differing objects: " + str(len(diff)) + "\n")
 
       sys.stdout.write("\n")
       sys.stdout.write("Different objects: \n")
       for d in diff:
          sys.stdout.write(d + "\n")
+      
+      if newitems is not None:
+         sys.stdout.write("\n" + "New objects: \n")
+         for n in newitems:
+            sys.stdout.write(n + "\n")
       
       if verbose:
          sys.stdout.write("\n")
@@ -52,10 +64,13 @@ class ChecksumCompare:
       #smaller will be distilled
       #equal, will be a staightforward comparison
       
-      if len(csvlist1) > len(csvlist2):
+      len1 = len(csvlist1)
+      len2 = len(csvlist2)
+      
+      if len1 > len2:
          bigger = set(csvlist1)
          smaller = set(csvlist2)
-      elif len(csvlist2) > len(csvlist1):    #verbose code style
+      elif len2 > len1:    #verbose code style
          bigger = set(csvlist2)
          smaller = set(csvlist1)
       else:                                  #again, verbose
@@ -72,6 +87,18 @@ class ChecksumCompare:
    def __getSame__(self, ordered_lists):
       return ordered_lists[self.SMALLER] & ordered_lists[self.BIGGER]
 
+   def __getNewCount__(self, ordered_lists, difflen):
+      newitems = False
+      countnew = len(ordered_lists[self.BIGGER]) - len(ordered_lists[self.SMALLER])
+      if countnew < difflen:
+         sys.stderr.write("List contains: " + str(difflen - countnew) + " new items as well. Will output:" + "\n")
+         newitems = True
+      return newitems
+
+   def __getNew__(self, ordered_lists):
+      newitems = set(ordered_lists[self.SMALLER]) - set(ordered_lists[self.BIGGER])
+      return newitems
+      
    def doCompare(self, check1, check2, pre, verbose):
       csvlist1 = self.returncsvaslist(check1, pre)
       csvlist2 = self.returncsvaslist(check2, pre)
@@ -81,11 +108,17 @@ class ChecksumCompare:
       #in smaller but not in bigger
       diff = self.__getDiff__(ordered_lists)
       
+      #if the new list contains new items compared to old list
+      newcount = self.__getNewCount__(ordered_lists, len(diff))  
+      newitems = None
+      if newcount:
+         newitems = self.__getNew__(ordered_lists)
+      
       #common elements in both
       same = self.__getSame__(ordered_lists)
 
       #output a report of findings...
-      self.outputformattedtext(check1, check2, same, diff, verbose)
+      self.outputformattedtext(check1, check2, same, diff, verbose, newitems)
 
 def checksumcompare(check1, check2, pre, verbose):
 
