@@ -52,9 +52,18 @@ class ChecksumCompare:
          list.append(row)
       return list
 
-   def returncsvaslist(self, csvfile, pre):
+   def returncsvaslist(self, fname, pre):
       list = []
-      with open(csvfile, 'rb') as csvfile: 
+      with open(fname, 'rb') as csvfile: 
+         abc = csvfile.read(3)
+         
+         #Look for UTF-8 BOM...
+         if abc == '\xEF\xBB\xBF':
+            sys.stderr.write("UTF-8 Byte order mark identified in '%s'. Ignoring" % fname)
+         else:
+            #go back to the beginning following previous read...
+            csvfile.seek(0)
+            
          csvaslist = csv.reader(csvfile, delimiter=',')
          list = self.preconditionlist(csvaslist, pre)
       return list
